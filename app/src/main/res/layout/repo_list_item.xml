@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout style="@style/layoutFormat">
+        <TextView style="@style/labelFormat"
+            android:text="@string/repo_id"/>
+        <TextView style="@style/valueFormat"
+            android:id="@+id/repoIdTxt"
+            tools:text="123456"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/layoutFormat">
+        <TextView style="@style/labelFormat"
+            android:text="@string/repo_name"/>
+        <TextView style="@style/valueFormat"
+            android:id="@+id/repoNameTxt"
+            tools:text="Repo Name"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/layoutFormat">
+        <TextView style="@style/labelFormat"
+            android:text="@string/repo_url"/>
+        <TextView style="@style/valueFormat"
+            android:id="@+id/repoUrlTxt"
+            tools:text="http://repo.url.com"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/layoutFormat">
+        <TextView style="@style/labelFormat"
+            android:text="@string/repo_size"/>
+        <TextView style="@style/valueFormat"
+            android:id="@+id/repoSizeTxt"
+            tools:text="123"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/layoutFormat">
+        <TextView style="@style/labelFormat"
+            android:text="@string/repo_description"/>
+        <TextView style="@style/valueFormat"
+            android:id="@+id/repoDescTxt"
+            tools:text="This is a Repo description"/>
+    </LinearLayout>
+
+    <!--Divider item separator-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/colorPrimary"/>
+        <!--android:background="?android:attr/colorAccent"/>-->
+        <!--android:background="@color/darkGray"/>-->
+
+</LinearLayout>
