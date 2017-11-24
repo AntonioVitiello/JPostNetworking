@@ -1,10 +1,13 @@
 <resources>
-    <!-- Blue Base application theme. -->
-    <style name="AppThemeBlue" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/bluePrimary</item>
-        <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
-        <item name="colorAccent">@color/blueAccent</item>
-        <item name="android:textColor">@color/bluePrimaryText</item>
+    <!-- Green Base application theme. -->
+    <style name="AppThemeGreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/greenPrimary</item>
+        <item name="colorPrimaryDark">@color/greenPrimaryDark</item>
+        <item name="colorAccent">@color/greenAccent</item>
+        <item name="titleTextColor">@color/greenPrimaryText</item>
+        <item name="colorButtonNormal">@color/greenPrimaryDark</item>
+        <item name="android:textColor">@color/greenPrimaryText</item>
+        <item name="lineDivider">@style/line_divider</item>
     </style>
 
     <!-- Red Base application theme. -->
@@ -12,7 +15,10 @@
         <item name="colorPrimary">@color/redPrimary</item>
         <item name="colorPrimaryDark">@color/redPrimaryDark</item>
         <item name="colorAccent">@color/redAccent</item>
+        <item name="titleTextColor">@color/redPrimaryText</item>
+        <item name="colorButtonNormal">@color/redPrimaryDark</item>
         <item name="android:textColor">@color/redPrimaryText</item>
+        <item name="lineDivider">@style/line_divider</item>
     </style>
 
     <!-- Yellow Base application theme. -->
@@ -20,38 +26,61 @@
         <item name="colorPrimary">@color/yellowPrimary</item>
         <item name="colorPrimaryDark">@color/yellowPrimaryDark</item>
         <item name="colorAccent">@color/yellowAccent</item>
+        <item name="titleTextColor">@color/yellowPrimaryText</item>
+        <item name="colorButtonNormal">@color/yellowPrimaryDark</item>
         <item name="android:textColor">@color/yellowPrimaryText</item>
+        <item name="lineDivider">@style/line_divider</item>
     </style>
 
-    <!-- Green Base application theme. -->
-    <style name="AppThemeGreen" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/greenPrimary</item>
-        <item name="colorPrimaryDark">@color/greenPrimaryDark</item>
-        <item name="colorAccent">@color/greenAccent</item>
-        <item name="android:textColor">@color/greenPrimaryText</item>
+    <!-- Blue Base application theme. -->
+    <style name="AppThemeBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/bluePrimary</item>
+        <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
+        <item name="colorAccent">@color/blueAccent</item>
+        <item name="titleTextColor">@color/bluePrimaryText</item>
+        <item name="colorButtonNormal">@color/bluePrimaryDark</item>
+        <item name="android:textColor">@color/bluePrimaryText</item>
+        <item name="lineDivider">@style/line_divider</item>
     </style>
 
-
-    <style name="labelFormat">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:minWidth">60sp</item>
-    </style>
-
-    <style name="valueFormat">
+    <style name="line_divider">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:background">@drawable/line_divider</item>
     </style>
 
     <style name="layoutFormat">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:padding">5dp</item>
+        <item name="android:layout_margin">5dp</item>
     </style>
+
+    <style name="labelFormat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:minWidth">60sp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="valueFormat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="counterFormat">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:gravity">right|top</item>
+        <item name="android:layout_gravity">right|top</item>
+    </style>
+
 </resources>

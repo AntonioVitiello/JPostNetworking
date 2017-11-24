@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private static final String KEY_ADAPTER_CONTENT = "gitReposJson";
     private static final String KEY_CURRENT_THEME_RES_ID = "currentThemeResId";
-    private static final int[] mThemesResId = new int[]{R.style.AppThemeBlue, R.style.AppThemeRed, R.style.AppThemeYellow, R.style.AppThemeGreen};
+    private static final int[] mThemesResId = new int[]{R.style.AppThemeGreen, R.style.AppThemeRed, R.style.AppThemeYellow, R.style.AppThemeBlue};
 
     private ListView mRepoListView;
     private RepoListAdapter mRepoListAdapter;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mRepoListView = (ListView) findViewById(R.id.repoListView);
-        mRepoListAdapter = new RepoListAdapter(getApplicationContext(), new ArrayList<GitRepo>());
+        mRepoListAdapter = new RepoListAdapter(this, new ArrayList<GitRepo>());
         mRepoListView.setAdapter(mRepoListAdapter);
 
         if(savedInstanceState != null && savedInstanceState.containsKey(KEY_ADAPTER_CONTENT)){
@@ -85,11 +85,13 @@ public class MainActivity extends AppCompatActivity {
     public void colorClick(View view) {
         mCurrThemeIndex = ++mCurrThemeIndex % mThemesResId.length;
         Toast.makeText(this, "Change Theme color", Toast.LENGTH_SHORT).show();
+
         finish();
         Bundle bundle = new Bundle();
         putActivityState(bundle);
-        Intent intent = new Intent(getApplicationContext(), this.getClass());
+        Intent intent = getIntent();
         intent.putExtras(bundle);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

@@ -61,6 +61,7 @@ public class RepoListAdapter extends BaseAdapter {
         holder.repoUrlTxt = (TextView)convertView.findViewById(R.id.repoUrlTxt);
         holder.repoSizeTxt = (TextView)convertView.findViewById(R.id.repoSizeTxt);
         holder.repoDescTxt = (TextView)convertView.findViewById(R.id.repoDescTxt);
+        holder.repoCounterTxt = (TextView)convertView.findViewById(R.id.repoCounterTxt);
 
         GitRepo repo = mGitRepoList.get(position);
         holder.position = position;
@@ -69,6 +70,7 @@ public class RepoListAdapter extends BaseAdapter {
         holder.repoUrlTxt.setText(repo.getUrl());
         holder.repoSizeTxt.setText(String.valueOf(repo.getSize()));
         holder.repoDescTxt.setText(String.valueOf(repo.getDescription()));
+        holder.repoCounterTxt.setText("(" + (position + 1) + ")");
 
         return convertView;
     }
@@ -80,6 +82,7 @@ public class RepoListAdapter extends BaseAdapter {
         TextView repoSizeTxt;
         TextView repoDescTxt;
         int position;
+        public TextView repoCounterTxt;
 
         public ViewHolder(View itemView) {
             itemView.setOnClickListener(this);
@@ -87,7 +90,7 @@ public class RepoListAdapter extends BaseAdapter {
 
         @Override
         public void onClick(View itemView) {
-            Toast.makeText(mContext, "List item index = " + (position + 1) + " of " + mGitRepoList.size(), Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "List item index = " + (position + 1) + " of " + mGitRepoList.size(), Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -2,22 +2,22 @@
 <resources>
     <color name="bluePrimary">#1a237e</color>
     <color name="bluePrimaryDark">#000051</color>
-    <color name="bluePrimaryText">#ffffff</color>
+    <color name="bluePrimaryText">#ff0000</color>
     <color name="blueAccent">#534bae</color>
 
     <color name="redPrimary">#b71c1c</color>
     <color name="redPrimaryDark">#7f0000</color>
-    <color name="redPrimaryText">#5f04d7</color>
+    <color name="redPrimaryText">#33f902</color>
     <color name="redAccent">#f05545</color>
 
     <color name="yellowPrimary">#fdd835</color>
     <color name="yellowPrimaryDark">#c6a700</color>
-    <color name="yellowPrimaryText">#700202</color>
+    <color name="yellowPrimaryText">#000dff</color>
     <color name="yellowAccent">#ffff6b</color>
 
     <color name="greenPrimary">#388e3c</color>
     <color name="greenPrimaryDark">#00600f</color>
-    <color name="greenPrimaryText">#f9b702</color>
+    <color name="greenPrimaryText">#f9ec06</color>
     <color name="greenAccent">#6abf69</color>
 
     <color name="darkGray">#4d4c4c</color>

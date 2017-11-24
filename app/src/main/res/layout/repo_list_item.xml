@@ -11,6 +11,9 @@
         <TextView style="@style/valueFormat"
             android:id="@+id/repoIdTxt"
             tools:text="123456"/>
+        <TextView style="@style/counterFormat"
+            android:id="@+id/repoCounterTxt"
+            tools:text="(123)"/>
     </LinearLayout>
 
     <LinearLayout style="@style/layoutFormat">
@@ -48,9 +51,16 @@
     <!--Divider item separator-->
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:background="?attr/colorPrimary"/>
-        <!--android:background="?android:attr/colorAccent"/>-->
+
+    <!--funzionano anche questi:-->
+        <!--style="@style/line_divider"/>-->
+        <!--style="?attr/lineDivider"/>-->
         <!--android:background="@color/darkGray"/>-->
+
+
+    <!--see: https://mobikul.com/create-custom-attributes-reference-color-style-xml-android/-->
+    <!--see: http://www.sherif.mobi/2012/12/applying-style-to-views-dynamically-in.html-->
 
 </LinearLayout>
