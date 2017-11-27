@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView mRepoListView;
     private RepoListAdapter mRepoListAdapter;
     private int mCurrThemeIndex = 0;
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,24 +91,32 @@ public class MainActivity extends AppCompatActivity {
         if(msg.getGitRepoList() != null) {
 //            mRepoListAdapter.setGitRepoList(msg.getGitRepoList());
             mRepoListAdapter.addAll(msg.getGitRepoList());
-            Toast.makeText(this, "GitHub repositories Loaded (" + mRepoListAdapter.getCount() + ")", Toast.LENGTH_SHORT).show();
+            showToast("GitHub repositories Loaded (" + mRepoListAdapter.getCount() + ")");
         }
+    }
+
+    private void showToast(String msg) {
+        if(mToast != null){
+            mToast.cancel();
+        }
+        mToast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        mToast.show();
     }
 
     public void startClick(View view) {
         // Post start message for worker Thread
         ApiHandler.doGetApiCall(ApiHandler.GIT_REPO_URL);
-        Toast.makeText(this, "Loading GitHub repositories info", Toast.LENGTH_SHORT).show();
+        showToast("Loading GitHub repositories info");
     }
 
     public void cleanClick(View view) {
         mRepoListAdapter.clear();
-        Toast.makeText(this, "Clean all GitHub repositories info", Toast.LENGTH_SHORT).show();
+        showToast("Clean all GitHub repositories info");
     }
 
     public void colorClick(View view) {
         mCurrThemeIndex = ++mCurrThemeIndex % mThemesResId.length;
-        Toast.makeText(this, "Change Theme color", Toast.LENGTH_SHORT).show();
+        showToast("Change Theme color");
 
         finish();
         Bundle bundle = new Bundle();
