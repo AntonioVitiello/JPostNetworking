@@ -10,6 +10,9 @@ import android.widget.Toast;
 import com.mindorks.androidjpost.JPost;
 import com.mindorks.androidjpost.droid.OnUiThread;
 import com.mindorks.jpost.core.OnMessage;
+import com.mindorks.jpost.exceptions.InvalidSubscriberException;
+import com.mindorks.jpost.exceptions.NoSuchChannelException;
+import com.mindorks.jpost.exceptions.NullObjectException;
 
 import java.util.ArrayList;
 
@@ -53,10 +56,30 @@ public class MainActivity extends AppCompatActivity {
             setTheme(savedInstanceState.getInt(KEY_CURRENT_THEME_RES_ID));
         }
 
-        // Register MainActivity as Subscriber
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         try {
+            // Register MainActivity as Subscriber
             JPost.getBroadcastCenter().addSubscriber(this);
         }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            // Unregister MainActivity as Subscriber
+            JPost.getBroadcastCenter().removeSubscriber(this);
+        } catch (InvalidSubscriberException e) {
+            e.printStackTrace();
+        } catch (NoSuchChannelException e) {
+            e.printStackTrace();
+        } catch (NullObjectException e) {
             e.printStackTrace();
         }
     }
@@ -101,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
         putActivityState(outState);
     }
 
+    /**
+     * Put MainActivity state in outState Bundle
+     * @param outState
+     */
     private void putActivityState(Bundle outState) {
         outState.putInt(KEY_CURRENT_THEME_RES_ID, mCurrThemeIndex);
         mRepoListAdapter.putGitReposJson(outState, KEY_ADAPTER_CONTENT);
