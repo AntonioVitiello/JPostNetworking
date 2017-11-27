@@ -31,3 +31,7 @@ tasks.whenTaskAdded { task ->
         task.enabled = false
     }
 }
+
+//task getHomeDir << {
+//    println gradle.gradleHomeDir
+//}
