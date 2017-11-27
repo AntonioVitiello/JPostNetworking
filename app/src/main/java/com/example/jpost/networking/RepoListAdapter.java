@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -100,11 +101,17 @@ public class RepoListAdapter extends BaseAdapter {
 //    }
 
     public void addAll(List<GitRepo> gitRepoList) {
+        if(gitRepoList ==  null){
+            return;
+        }
         mGitRepoList.addAll(gitRepoList);
         notifyDataSetChanged();
     }
 
     public void addAll(String gitReposJson) {
+        if(gitReposJson == null){
+            return;
+        }
         Gson gson = new GsonBuilder().create();
         GitRepo[] gitRepoArray = gson.fromJson(gitReposJson, GitRepo[].class);
         mGitRepoList.addAll(Arrays.asList(gitRepoArray));
@@ -121,6 +128,10 @@ public class RepoListAdapter extends BaseAdapter {
         Gson gson = new GsonBuilder().create();
         String gitReposJson = gson.toJson(gitReposArray, GitRepo[].class);
         bundle.putString(key, gitReposJson);
+    }
+
+    public void putGitReposParcelable(Bundle bundle, String key) {
+        bundle.putParcelableArrayList(key, ((ArrayList<GitRepo>) mGitRepoList));
     }
 
 }

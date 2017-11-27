@@ -1,5 +1,8 @@
 package com.example.jpost.networking;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
  *  “@SerializedName” : Is an annotation from gson library that maps the variable to the json key.
  *  “@Expose” : It is an annotation from gson library. It makes only the variable with expose to be available for parsing.
  */
-public class GitRepo {
+public class GitRepo implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -29,6 +32,34 @@ public class GitRepo {
     @SerializedName("description")
     @Expose
     private String description;
+
+    protected GitRepo(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        name = in.readString();
+        url = in.readString();
+        if (in.readByte() == 0) {
+            size = null;
+        } else {
+            size = in.readInt();
+        }
+        description = in.readString();
+    }
+
+    public static final Creator<GitRepo> CREATOR = new Creator<GitRepo>() {
+        @Override
+        public GitRepo createFromParcel(Parcel in) {
+            return new GitRepo(in);
+        }
+
+        @Override
+        public GitRepo[] newArray(int size) {
+            return new GitRepo[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -80,4 +111,27 @@ public class GitRepo {
                 + "}";
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(name);
+        dest.writeString(url);
+        if (size == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(size);
+        }
+        dest.writeString(description);
+    }
 }
