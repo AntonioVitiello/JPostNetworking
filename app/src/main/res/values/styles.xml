@@ -11,36 +11,33 @@
     </style>
 
     <!-- Red Base application theme. -->
-    <style name="AppThemeRed" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeRed" parent="AppThemeGreen">
         <item name="colorPrimary">@color/redPrimary</item>
         <item name="colorPrimaryDark">@color/redPrimaryDark</item>
         <item name="colorAccent">@color/redAccent</item>
         <item name="titleTextColor">@color/redPrimaryText</item>
         <item name="colorButtonNormal">@color/redPrimaryDark</item>
         <item name="android:textColor">@color/redPrimaryText</item>
-        <item name="lineDivider">@style/line_divider</item>
     </style>
 
     <!-- Yellow Base application theme. -->
-    <style name="AppThemeYellow" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeYellow" parent="AppThemeGreen">
         <item name="colorPrimary">@color/yellowPrimary</item>
         <item name="colorPrimaryDark">@color/yellowPrimaryDark</item>
         <item name="colorAccent">@color/yellowAccent</item>
         <item name="titleTextColor">@color/yellowPrimaryText</item>
         <item name="colorButtonNormal">@color/yellowPrimaryDark</item>
         <item name="android:textColor">@color/yellowPrimaryText</item>
-        <item name="lineDivider">@style/line_divider</item>
     </style>
 
     <!-- Blue Base application theme. -->
-    <style name="AppThemeBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeBlue" parent="AppThemeGreen">
         <item name="colorPrimary">@color/bluePrimary</item>
         <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
         <item name="colorAccent">@color/blueAccent</item>
         <item name="titleTextColor">@color/bluePrimaryText</item>
         <item name="colorButtonNormal">@color/bluePrimaryDark</item>
         <item name="android:textColor">@color/bluePrimaryText</item>
-        <item name="lineDivider">@style/line_divider</item>
     </style>
 
     <style name="line_divider">

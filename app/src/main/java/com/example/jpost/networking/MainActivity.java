@@ -3,7 +3,6 @@ package com.example.jpost.networking;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -14,6 +13,7 @@ import com.mindorks.jpost.core.OnMessage;
 import com.mindorks.jpost.exceptions.InvalidSubscriberException;
 import com.mindorks.jpost.exceptions.NoSuchChannelException;
 import com.mindorks.jpost.exceptions.NullObjectException;
+import com.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,20 +44,18 @@ public class MainActivity extends AppCompatActivity {
 
         String gitReposJson = null;
         List<GitRepo> gitRepos = null;
-
-        // On Click COLOR Button
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {
-            mThemeIndex = extras.getInt(KEY_CURRENT_THEME_ID);
-            gitReposJson = extras.getString(KEY_REPOS_JSON);
-            gitRepos = extras.getParcelableArrayList(KEY_REPOS_PARCELABLE);
-        }
 
-        // On screen rotation or app became foregraound from background
+        /* On screen rotation or app became foreground from background use savedInstanceState and get Parcelable
+         * while onClick on COLOR Button use extras and get JSON string */
         if(savedInstanceState != null){
             mThemeIndex = savedInstanceState.getInt(KEY_CURRENT_THEME_ID);
-            gitReposJson = savedInstanceState.getString(KEY_REPOS_JSON);
             gitRepos = savedInstanceState.getParcelableArrayList(KEY_REPOS_PARCELABLE);
+            Log.d(LOG_TAG, "onCreate: loaded state from savedInstanceState (Parcelable!)" + ", mThemeIndex = " + mThemeIndex + ", gitRepos = " + gitRepos);
+        } else if(extras != null) {
+            mThemeIndex = extras.getInt(KEY_CURRENT_THEME_ID);
+            gitReposJson = extras.getString(KEY_REPOS_JSON);
+            Log.d(LOG_TAG, "onCreate: loaded state from extras (JSON string!)" + ", mThemeIndex = " + mThemeIndex + ", gitReposJson = " + gitReposJson);
         }
 
         // Set Theme before setContentView !!
@@ -68,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         mRepoListAdapter = new RepoListAdapter(this, new ArrayList<GitRepo>());
         mRepoListView.setAdapter(mRepoListAdapter);
 
-        // load all repos if saved like a JSON string
+        // load all repos from a JSON string
         mRepoListAdapter.addAll(gitReposJson);
 
-        // load all repos if saved like a Parcelable ArrayList
+        // load all repos from a Parcelable ArrayList
         mRepoListAdapter.addAll(gitRepos);
     }
 
@@ -121,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void startClick(View view) {
         // Post start message for worker Thread
-        ApiHandler.doGetApiCall(ApiHandler.GIT_REPO_URL);
+//        ApiHandler.doGetApiCall(ApiHandler.GIT_REPO_URL_1);
+//        ApiHandler.doGetApiCall(ApiHandler.GIT_REPO_URL_2);
+        ApiHandler.doGetApiCall("put here an object instance as parameter");
         showToast("Loading GitHub repositories info");
     }
 
@@ -130,15 +130,14 @@ public class MainActivity extends AppCompatActivity {
         showToast("Clean all GitHub repositories info");
     }
 
-    // Persist state with a JSON string
+    // onClick on Color button: Persist state with a JSON string
     public void colorClick(View view) {
         mThemeIndex = ++mThemeIndex % mThemesResId.length;
         showToast("Change Theme color");
 
         finish();
         Bundle bundle = new Bundle();
-        putActivityStateJson(bundle);
-//        putActivityStateParcelable(outState);
+        putActivityStateJson(bundle); // or putActivityStateParcelable(outState);
         Intent intent = getIntent();
         intent.putExtras(bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -149,17 +148,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-//        putActivityStateJson(outState);
-        putActivityStateParcelable(outState);
+        putActivityStateParcelable(outState); // or putActivityStateJson(outState);
     }
 
     /**
      * Put MainActivity state in outState Bundle like a JSON string
-     * @param outState put in this Bundle
+     * @param extras put in this Bundle
      */
-    private void putActivityStateJson(Bundle outState) {
-        outState.putInt(KEY_CURRENT_THEME_ID, mThemeIndex);
-        mRepoListAdapter.putGitReposJson(outState, KEY_REPOS_JSON);
+    private void putActivityStateJson(Bundle extras) {
+        extras.putInt(KEY_CURRENT_THEME_ID, mThemeIndex);
+        mRepoListAdapter.putGitReposJson(extras, KEY_REPOS_JSON);
         Log.d(LOG_TAG, "putActivityStateJson: Persist state with a JSON string!");
     }
 
@@ -168,8 +166,9 @@ public class MainActivity extends AppCompatActivity {
      * @param outState put in this Bundle
      */
     private void putActivityStateParcelable(Bundle outState) {
+        getIntent().replaceExtras(new Bundle());
         outState.putInt(KEY_CURRENT_THEME_ID, mThemeIndex);
         mRepoListAdapter.putGitReposParcelable(outState, KEY_REPOS_PARCELABLE);
-        Log.d(LOG_TAG, "putActivityStateParcelable: Persist state with Parcelable ArrayList!");
+        Log.d(LOG_TAG, "putActivityStateParcelable: Persist state with Parcelable!");
     }
 }

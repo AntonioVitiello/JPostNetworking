@@ -1,6 +1,6 @@
 package com.example.jpost.networking;
 
-import android.util.Log;
+import com.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,11 +10,13 @@ import com.mindorks.jpost.exceptions.JPostNotRunningException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by antlap on 22/11/2017.
@@ -37,16 +39,18 @@ import java.util.Arrays;
  * https://github.com/janishar/JPost
  */
 
-public class ApiHandler{
+public class ApiHandler {
     private static final String LOG_PREFIX = "antlap";
     private static final String LOG_TAG = LOG_PREFIX + ApiHandler.class.getSimpleName();
 
-    public static String GIT_REPO_URL = "https://api.github.com/users/mralexgray/repos";
+    // Two different API to invoke = two different JSON to parse
+    public static String GIT_REPO_URL_1 = "https://api.github.com/users/mralexgray/repos";
+    public static String GIT_REPO_URL_2 = "https://api.github.com/search/repositories?q=android&sort=stars";
 
     private static final int API_CHANNEL_ID = 1000;
     private static ApiHandler apiHandler;
 
-    public static void init(){
+    public static void init() {
         apiHandler = new ApiHandler();
     }
 
@@ -60,35 +64,77 @@ public class ApiHandler{
 //            JPost.getBroadcastCenter().createPublicChannel(API_CHANNEL_ID);
 //            JPost.getBroadcastCenter().addSubscriber(API_CHANNEL_ID, this);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
      * Send private async msg to process GitHub request in a separate Thread
-     * @param url
+     *
      */
-    public static void doGetApiCall(String url){
+    public static void doGetApiCall(String msg) {
         Log.d(LOG_TAG, "doGetApiCall: currentThread = " + Thread.currentThread());
         try {
 
             // Send asynchrone broadcast message in Private Channel
-            JPost.getBroadcastCenter().broadcastAsync(apiHandler, API_CHANNEL_ID, url);
+            JPost.getBroadcastCenter().broadcastAsync(apiHandler, API_CHANNEL_ID, msg);
 
             // Send broadcast message in Public Channel
 //            JPost.getBroadcastCenter().broadcastAsync(API_CHANNEL_ID, url);
 
-        }catch (JPostNotRunningException e){
+        } catch (JPostNotRunningException e) {
             e.printStackTrace();
         }
     }
 
     @OnMessage(channelId = API_CHANNEL_ID)
-    private void processGitHubRequest(String url) {
-        Log.d(LOG_TAG, "processGitHubRequest: currentThread = " + Thread.currentThread() + ", url = " + url);
+    public void processGitHubRequestUrl1(String msg) throws IOException {
+        Log.d(LOG_TAG, "processGitHubRequest: currentThread = " + Thread.currentThread() + ", url = " + GIT_REPO_URL_1);
+        HttpURLConnection urlConnection = null;
         try {
-            URL obj = new URL(url);
+            URL myUrl = new URL(GIT_REPO_URL_1);
+            urlConnection = (HttpURLConnection) myUrl.openConnection();
+            InputStream inputStream = urlConnection.getInputStream();
+
+            int responseCode = urlConnection.getResponseCode();
+            Log.d(LOG_TAG, "Response Code : " + responseCode);
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                Scanner scanner = new Scanner(inputStream);
+                scanner.useDelimiter("\\A");
+
+                if (scanner.hasNext()) {
+                    String response = scanner.next();
+
+                    Log.d(LOG_TAG, "Response2 : " + response);
+                    Gson gson = new GsonBuilder().create();
+
+                    // Parse JSON Response
+                    GitRepo[] gitRepoArray = gson.fromJson(response, GitRepo[].class);
+                    GitRepoMsg gitRepoMsg = new GitRepoMsg(Arrays.asList(gitRepoArray));
+                    Log.d(LOG_TAG, "ResponseObj : " + gitRepoMsg.getGitRepoList());
+                    JPost.getBroadcastCenter().broadcastAsync(gitRepoMsg);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JPostNotRunningException e) {
+            e.printStackTrace();
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+    }
+
+
+    @OnMessage(channelId = API_CHANNEL_ID)
+    private void processGitHubRequestUrl2(String msg) {
+        Log.d(LOG_TAG, "processGitHubRequest: currentThread = " + Thread.currentThread() + ", url = " + GIT_REPO_URL_2);
+        try {
+            URL obj = new URL(GIT_REPO_URL_2);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
 
@@ -108,16 +154,19 @@ public class ApiHandler{
 
                 Log.d(LOG_TAG, "Response : " + response);
                 Gson gson = new GsonBuilder().create();
-                GitRepo[] gitRepoArray = gson.fromJson(response.toString(), GitRepo[].class);
-                GitRepoMsg gitRepoMsg = new GitRepoMsg(Arrays.asList(gitRepoArray));
+
+                // Parse JSON Response
+                GitReposContainer gitRepoContainer = gson.fromJson(response.toString(), GitReposContainer.class);
+                Log.d(LOG_TAG, "gitRepoContainer = " + gitRepoContainer);
+                List<GitRepo> gitRepoArray = gitRepoContainer.getItems();
+                GitRepoMsg gitRepoMsg = new GitRepoMsg(gitRepoArray);
                 Log.d(LOG_TAG, "ResponseObj : " + gitRepoMsg.getGitRepoList());
                 JPost.getBroadcastCenter().broadcastAsync(gitRepoMsg);
             }
-        }catch (MalformedURLException e){
+
+        } catch (IOException e) {
             e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (JPostNotRunningException e){
+        } catch (JPostNotRunningException e) {
             e.printStackTrace();
         }
     }

@@ -33,34 +33,6 @@ public class GitRepo implements Parcelable {
     @Expose
     private String description;
 
-    protected GitRepo(Parcel in) {
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readInt();
-        }
-        name = in.readString();
-        url = in.readString();
-        if (in.readByte() == 0) {
-            size = null;
-        } else {
-            size = in.readInt();
-        }
-        description = in.readString();
-    }
-
-    public static final Creator<GitRepo> CREATOR = new Creator<GitRepo>() {
-        @Override
-        public GitRepo createFromParcel(Parcel in) {
-            return new GitRepo(in);
-        }
-
-        @Override
-        public GitRepo[] newArray(int size) {
-            return new GitRepo[size];
-        }
-    };
-
     public Integer getId() {
         return id;
     }
@@ -110,6 +82,35 @@ public class GitRepo implements Parcelable {
                 + ", description = " + description
                 + "}";
     }
+
+
+    protected GitRepo(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        name = in.readString();
+        url = in.readString();
+        if (in.readByte() == 0) {
+            size = null;
+        } else {
+            size = in.readInt();
+        }
+        description = in.readString();
+    }
+
+    public static final Creator<GitRepo> CREATOR = new Creator<GitRepo>() {
+        @Override
+        public GitRepo createFromParcel(Parcel in) {
+            return new GitRepo(in);
+        }
+
+        @Override
+        public GitRepo[] newArray(int size) {
+            return new GitRepo[size];
+        }
+    };
 
     @Override
     public int describeContents() {
