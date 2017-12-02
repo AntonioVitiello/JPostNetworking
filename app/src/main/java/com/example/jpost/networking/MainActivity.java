@@ -26,8 +26,7 @@ import java.util.List;
  */
 
 public class MainActivity extends AppCompatActivity {
-    private static final String LOG_PREFIX = "antlap";
-    private static final String LOG_TAG = LOG_PREFIX + MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String KEY_REPOS_JSON = "gitReposJson";
     private static final String KEY_REPOS_PARCELABLE = "gitReposParcelable";
     private static final String KEY_CURRENT_THEME_ID = "currentThemeResId";

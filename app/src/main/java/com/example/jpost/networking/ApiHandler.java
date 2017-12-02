@@ -40,8 +40,7 @@ import java.util.Scanner;
  */
 
 public class ApiHandler {
-    private static final String LOG_PREFIX = "antlap";
-    private static final String LOG_TAG = LOG_PREFIX + ApiHandler.class.getSimpleName();
+    private static final String LOG_TAG = ApiHandler.class.getSimpleName();
 
     // Two different API to invoke = two different JSON to parse
     public static String GIT_REPO_URL_1 = "https://api.github.com/users/mralexgray/repos";

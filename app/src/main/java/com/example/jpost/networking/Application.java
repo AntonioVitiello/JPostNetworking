@@ -9,8 +9,7 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         ApiHandler.init();
-        Log.init(BuildConfig.DEBUG, "antlap");
-//        Log.init(this, BuildConfig.DEBUG);
+        Log.init(this);
     }
 
 }

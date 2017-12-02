@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--if true compose log tag with classname + log_tag string-->
+    <bool name="log_tag_concat">true</bool>
+</resources>

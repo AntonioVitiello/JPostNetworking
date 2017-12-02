@@ -1,8 +1,8 @@
 package com.util;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 
+import com.example.jpost.networking.BuildConfig;
 import com.example.jpost.networking.R;
 
 /**
@@ -10,65 +10,58 @@ import com.example.jpost.networking.R;
  */
 
 public class Log {
-    private static final int APP_TAG_MAX_LENGHT = 23;
-    private static String DEBUG_TAG = null;
-    private static boolean INITIALIZED = false;
-    private static boolean DEBUG = true;
+    private static String sLogTag = null;
+    private static boolean sIsLogTagDefined = false;
+    private static boolean sIsLogTagConcat = false;
 
-    public static void init(boolean debug, String debugTag) {
-        DEBUG_TAG = debugTag;
-        init(null, debug);
-    }
-
-    public static void init(@Nullable Context context, boolean debug) {
-        if (!INITIALIZED) {
-            INITIALIZED = true;
-            DEBUG = debug;
-            if (DEBUG && context != null) {
-                String appName = context.getResources().getString(R.string.app_name);
-                DEBUG_TAG = appName.substring(0, Math.min(appName.length(), APP_TAG_MAX_LENGHT)) + " ";
-            }
+    public static void init(Context context) {
+        String logTag = context.getString(R.string.log_tag);
+        boolean isLogTagConcat = context.getResources().getBoolean(R.bool.log_tag_concat);
+        sIsLogTagDefined = logTag != null;
+        if(sIsLogTagDefined) {
+            sLogTag = logTag;
+            sIsLogTagConcat = isLogTagConcat;
         }
     }
 
     public static void v(String tag, String msg, Object... args) {
-        if (DEBUG) {
-            String logTag = DEBUG_TAG != null ? DEBUG_TAG : tag;
+        if (BuildConfig.DEBUG) {
+            String logTag = sIsLogTagDefined ? (sIsLogTagConcat ? sLogTag + tag : sLogTag) : tag;
             android.util.Log.v(logTag, formatMessage(msg, args));
         }
     }
 
     public static void v(String tag, String msg, Throwable throwable, Object... args) {
-        if (DEBUG) {
-            String logTag = DEBUG_TAG != null ? DEBUG_TAG : tag;
+        if (BuildConfig.DEBUG) {
+            String logTag = sIsLogTagDefined ? (sIsLogTagConcat ? sLogTag + tag : sLogTag) : tag;
             android.util.Log.v(logTag, formatMessage(msg, args), throwable);
         }
     }
 
     public static void d(String tag, String msg, Object... args) {
-        if (DEBUG) {
-            String logTag = DEBUG_TAG != null ? DEBUG_TAG : tag;
+        if (BuildConfig.DEBUG) {
+            String logTag = sIsLogTagDefined ? (sIsLogTagConcat ? sLogTag + tag : sLogTag) : tag;
             android.util.Log.d(logTag, formatMessage(msg, args));
         }
     }
 
     public static void d(String tag, String msg, Throwable throwable, Object... args) {
-        if (DEBUG) {
-            String logTag = DEBUG_TAG != null ? DEBUG_TAG : tag;
+        if (BuildConfig.DEBUG) {
+            String logTag = sIsLogTagDefined ? (sIsLogTagConcat ? sLogTag + tag : sLogTag) : tag;
             android.util.Log.d(logTag, formatMessage(msg, args), throwable);
         }
     }
 
     public static void i(String tag, String msg, Object... args) {
-        if (DEBUG) {
-            String logTag = DEBUG_TAG != null ? DEBUG_TAG : tag;
+        if (BuildConfig.DEBUG) {
+            String logTag = sIsLogTagDefined ? (sIsLogTagConcat ? sLogTag + tag : sLogTag) : tag;
             android.util.Log.i(logTag, formatMessage(msg, args));
         }
     }
 
     public static void i(String tag, String msg, Throwable throwable, Object... args) {
-        if (DEBUG) {
-            String logTag = DEBUG_TAG != null ? DEBUG_TAG : tag;
+        if (BuildConfig.DEBUG) {
+            String logTag = sIsLogTagDefined ? (sIsLogTagConcat ? sLogTag + tag : sLogTag) : tag;
             android.util.Log.i(logTag, formatMessage(msg, args), throwable);
         }
     }
