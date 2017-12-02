@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="repo_size">Lungh:</string>
+    <string name="repo_url">Indir:</string>
+    <string name="repo_name">Nome:</string>
+    <string name="repo_id">Id Repo:</string>
+    <string name="repo_description">Descr:</string>
+</resources>

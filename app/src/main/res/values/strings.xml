@@ -1,5 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">JPostNetworking</string>
+    <string name="app_name" translatable="false">JPostNetworking</string>
     <string name="log_tag" translatable="false">antlap</string>
     <string name="repo_size">Size:</string>
     <string name="repo_url">URL:</string>
