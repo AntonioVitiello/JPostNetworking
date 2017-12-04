@@ -9,7 +9,9 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         ApiHandler.init();
-        Log.init(this);
+        Log.init(BuildConfig.DEBUG,
+                getString(R.string.log_tag),
+                getResources().getBoolean(R.bool.log_tag_concat));
     }
 
 }

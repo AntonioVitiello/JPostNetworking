@@ -32,7 +32,7 @@
   <component name="ChangeListManager">
     <list default="true" id="688029a2-1f72-4f47-a925-eabeeaa333ba" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/Log.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/util/Log.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jpost/networking/Application.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jpost/networking/Application.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -2187,7 +2187,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512426560686" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512426593571" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2235,7 +2235,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512426560686" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512426593571" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2397,7 +2397,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512426560692" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512426593572" />
       </method>
     </configuration>
     <list size="2">
@@ -2477,7 +2477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512211288765</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="MyLogger debug">
+      <created>1512426586406</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1512426586406</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2553,7 +2560,8 @@
     <MESSAGE value="Optimized load state&#10;Added new API URL&#10;Added my Logger&#10;Added Scanner&#10;Modified themes" />
     <MESSAGE value="Logger optimizations" />
     <MESSAGE value="String translation with &quot;Translations Editor&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="String translation with &quot;Translations Editor&quot;" />
+    <MESSAGE value="MyLogger debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="MyLogger debug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
